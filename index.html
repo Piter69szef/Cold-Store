@@ -12,89 +12,196 @@
         }
 
         body {
-            background-color: #0d0d0d;
+            background-color: #080808;
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
-        /* Górna nawigacja / Header */
+        /* HEADER & NAVIGATION */
         header {
             width: 100%;
-            padding: 20px 40px;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background-color: #0d0d0d;
-            border-bottom: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1f1f1f;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        /* Kontener logo z czerwonym gradientowym hoverem */
-        .logo-container {
+        /* LOGO Z CZERWONYM GRADIENTEM ON HOVER */
+        .logo-box {
             position: relative;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            padding: 10px 18px;
+            gap: 10px;
+            padding: 8px 16px;
+            border: 1px solid #2a2a2a;
             border-radius: 6px;
             overflow: hidden;
             text-decoration: none;
-            background: transparent;
+            background: #111;
             cursor: pointer;
+            transition: border-color 0.3s;
         }
 
-        /* Czerwony gradient przechodzący z lewej do prawej po najechaniu */
-        .logo-container::before {
+        .logo-box::before {
             content: "";
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, #ff0000, #990000);
-            transition: left 0.4s ease-in-out;
+            background: linear-gradient(90deg, #d30000, #7a0000);
+            transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1;
         }
 
-        .logo-container:hover::before {
+        .logo-box:hover::before {
             left: 0;
         }
 
-        /* Obrazek parafki ponad efektem hover */
+        .logo-box:hover {
+            border-color: #ff0000;
+        }
+
         .logo-img {
-            height: 38px;
+            height: 24px;
             width: auto;
             position: relative;
             z-index: 2;
-            filter: brightness(0) invert(1); /* Zapewnia biały kolor parafki */
-            transition: transform 0.2s ease;
+            filter: brightness(0) invert(1);
         }
 
-        .logo-container:hover .logo-img {
-            transform: scale(1.05);
+        .logo-text {
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: #fff;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Główna sekcja z produktami */
+        /* CONTROL BUTTONS (LANG, CURRENCY, CART) */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ctrl-btn {
+            background: #161616;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .ctrl-btn:hover {
+            background: #222;
+            border-color: #555;
+        }
+
+        .cart-btn {
+            background: #cc0000;
+            border: none;
+            color: #fff;
+        }
+
+        .cart-btn:hover {
+            background: #e60000;
+        }
+
+        /* RED HERO BANNER */
+        .hero-banner {
+            width: 100%;
+            background: linear-gradient(135deg, #b30000 0%, #800000 100%);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid #e60000;
+        }
+
+        .hero-banner .bg-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-10deg);
+            font-size: 12rem;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.15);
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        /* MAIN CONTENT & SECTIONS */
         main {
-            padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            margin: 40px 0 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+        }
+
+        .section-title::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 22px;
+            background-color: #cc0000;
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-            width: 100%;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
         .product-card {
-            background: #161616;
-            border: 1px solid #262626;
-            border-radius: 12px;
+            background: #111111;
+            border: 1px solid #222222;
+            border-radius: 10px;
             padding: 16px;
             display: flex;
             flex-direction: column;
@@ -104,35 +211,35 @@
 
         .product-card:hover {
             transform: translateY(-4px);
-            border-color: #404040;
+            border-color: #cc0000;
         }
 
         .product-image {
             width: 100%;
-            border-radius: 8px;
-            background-color: #000000;
-            margin-bottom: 15px;
+            border-radius: 6px;
+            background-color: #000;
+            margin-bottom: 14px;
+            aspect-ratio: 1/1;
             object-fit: cover;
         }
 
         .product-title {
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-size: 1rem;
+            font-weight: 800;
             margin-bottom: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .product-desc {
-            font-size: 0.85rem;
-            color: #a3a3a3;
+            font-size: 0.8rem;
+            color: #888888;
             margin-bottom: 12px;
         }
 
         .product-price {
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 16px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            margin-bottom: 14px;
             color: #ffffff;
         }
 
@@ -144,96 +251,341 @@
             color: #000000;
             text-align: center;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 800;
             border-radius: 6px;
             text-transform: uppercase;
+            font-size: 0.85rem;
             letter-spacing: 1px;
-            transition: background-color 0.2s, color 0.2s;
+            transition: background-color 0.2s;
         }
 
         .buy-button:hover {
-            background-color: #cccccc;
+            background-color: #cc0000;
+            color: #ffffff;
+        }
+
+        /* COMING SOON BANNER */
+        .coming-soon-section {
+            text-align: center;
+            padding: 80px 20px 40px 20px;
+            border-top: 1px solid #1a1a1a;
+            margin-top: 60px;
+        }
+
+        .coming-soon-text {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            color: #333;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .coming-soon-text:hover {
+            color: #cc0000;
+        }
+
+        /* CART DRAWER */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 380px;
+            height: 100vh;
+            background: #0d0d0d;
+            border-left: 1px solid #222;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+            z-index: 1000;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222;
+        }
+
+        .cart-title {
+            font-size: 1.2rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .close-cart:hover {
+            color: #fff;
+        }
+
+        .cart-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #666;
+            text-align: center;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: none;
+        }
+
+        .cart-overlay.open {
+            display: block;
         }
 
         footer {
-            margin-top: auto;
-            padding: 20px;
-            color: #525252;
+            padding: 30px;
+            color: #444;
             font-size: 0.8rem;
             text-align: center;
-            border-top: 1px solid #1a1a1a;
+            border-top: 1px solid #111;
         }
     </style>
 </head>
 <body>
 
+    <!-- OVERLAY DLA KOSZYKA -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- WYSYWANY KOSZYK -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <span class="cart-title" id="txtCartTitle">TWÓJ KOSZYK</span>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-body">
+            <p id="txtCartEmpty">Koszyk realizowany jest bezpośrednio w bezpiecznym systemie Amaze Commerce po kliknięciu "KUP TERAZ".</p>
+        </div>
+    </div>
+
+    <!-- NAGŁÓWEK STRONY -->
     <header>
-        <a href="#" class="logo-container">
-            <img src="parafka logo.png" alt="CØLD Logo" class="logo-img">
+        <a href="#" class="logo-box">
+            <img src="parafka logo.png" alt="CØLD" class="logo-img">
+            <span class="logo-text">CØLD</span>
         </a>
+
+        <div class="header-controls">
+            <button class="ctrl-btn" id="btnLang">PL</button>
+            <button class="ctrl-btn" id="btnCurr">USD ($)</button>
+            <button class="ctrl-btn cart-btn" id="btnCart">🛒 <span id="txtCartBtn">KOSZYK (0)</span></button>
+        </div>
     </header>
 
-    <main>
-        <div class="products-grid">
+    <!-- BANNER GŁÓWNY -->
+    <section class="hero-banner">
+        <div class="bg-overlay">cøld</div>
+        <div class="hero-subtitle">CØLD A$ F_CK</div>
+        <h1 class="hero-title">CØLD I$ F!RE</h1>
+    </section>
 
-            <!-- PRODUKT 1 -->
+    <!-- KROK GŁÓWNY Z PRODUKTAMI -->
+    <main>
+
+        <!-- SEKCTA 1: POPULARNE -->
+        <h2 class="section-title" id="secPopular">POPULARNE</h2>
+        <div class="products-grid">
             <div class="product-card">
                 <div>
-                    <img src="bluza-szara.png" alt="CØLD Black Heavyweight Longsleeve" class="product-image">
-                    <h2 class="product-title">CØLD Classic Longsleeve</h2>
+                    <img src="bluza-szara.png" alt="CØLD Classic Longsleeve Black" class="product-image">
+                    <h3 class="product-title">CØLD Classic Longsleeve</h3>
                     <p class="product-desc">Black / Heavyweight Garment-Dyed Cotton / Boxy Fit</p>
                 </div>
                 <div>
-                    <div class="product-price">$34.99</div>
+                    <div class="product-price" data-usd="34.99">$34.99</div>
                     <a href="https://app.amazecommerce.com/shop/coldwear/cld-classic-5" target="_blank" class="buy-button">KUP TERAZ</a>
                 </div>
             </div>
 
-            <!-- PRODUKT 2 -->
             <div class="product-card">
                 <div>
-                    <img src="bluza-biala.png" alt="CØLD White Heavyweight Longsleeve" class="product-image">
-                    <h2 class="product-title">CØLD Classic Longsleeve</h2>
-                    <p class="product-desc">White / Heavyweight Garment-Dyed Cotton / Boxy Fit</p>
-                </div>
-                <div>
-                    <div class="product-price">$34.99</div>
-                    <a href="https://app.amazecommerce.com/shop/coldwear/cld-classic-4" target="_blank" class="buy-button">KUP TERAZ</a>
-                </div>
-            </div>
-
-            <!-- PRODUKT 3 -->
-            <div class="product-card">
-                <div>
-                    <img src="zip-hoodie.png" alt="CØLD Black Heavyweight Tee" class="product-image">
-                    <h2 class="product-title">CØLD Classic T-Shirt</h2>
+                    <img src="zip-hoodie.png" alt="CØLD Classic T-Shirt Black" class="product-image">
+                    <h3 class="product-title">CØLD Classic T-Shirt</h3>
                     <p class="product-desc">Black / Comfort Colors 1717 Heavyweight Tee / Oversize Fit</p>
                 </div>
                 <div>
-                    <div class="product-price">$24.99</div>
+                    <div class="product-price" data-usd="24.99">$24.99</div>
+                    <a href="https://app.amazecommerce.com/shop/coldwear/cld-classic-3" target="_blank" class="buy-button">KUP TERAZ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEKCJA 2: KOSZULKI -->
+        <h2 class="section-title" id="secTshirts">KOSZULKI</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div>
+                    <img src="zip-hoodie.png" alt="CØLD Classic T-Shirt Black" class="product-image">
+                    <h3 class="product-title">CØLD Classic T-Shirt</h3>
+                    <p class="product-desc">Black / Comfort Colors 1717 Heavyweight Tee / Oversize Fit</p>
+                </div>
+                <div>
+                    <div class="product-price" data-usd="24.99">$24.99</div>
                     <a href="https://app.amazecommerce.com/shop/coldwear/cld-classic-3" target="_blank" class="buy-button">KUP TERAZ</a>
                 </div>
             </div>
 
-            <!-- PRODUKT 4 -->
             <div class="product-card">
                 <div>
-                    <img src="koszulka-kwiat.png" alt="CØLD White Heavyweight Tee" class="product-image">
-                    <h2 class="product-title">CØLD Classic T-Shirt</h2>
+                    <img src="koszulka-kwiat.png" alt="CØLD Classic T-Shirt White" class="product-image">
+                    <h3 class="product-title">CØLD Classic T-Shirt</h3>
                     <p class="product-desc">White / Comfort Colors 1717 Heavyweight Tee / Oversize Fit</p>
                 </div>
                 <div>
-                    <div class="product-price">$24.99</div>
+                    <div class="product-price" data-usd="24.99">$24.99</div>
                     <a href="https://app.amazecommerce.com/shop/coldwear/untitled-product-2" target="_blank" class="buy-button">KUP TERAZ</a>
                 </div>
             </div>
-
         </div>
+
+        <!-- SEKCJA 3: LONGSLEEVE -->
+        <h2 class="section-title" id="secLongsleeve">LONGSLEEVE</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div>
+                    <img src="bluza-szara.png" alt="CØLD Classic Longsleeve Black" class="product-image">
+                    <h3 class="product-title">CØLD Classic Longsleeve</h3>
+                    <p class="product-desc">Black / Heavyweight Garment-Dyed Cotton / Boxy Fit</p>
+                </div>
+                <div>
+                    <div class="product-price" data-usd="34.99">$34.99</div>
+                    <a href="https://app.amazecommerce.com/shop/coldwear/cld-classic-5" target="_blank" class="buy-button">KUP TERAZ</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <img src="bluza-biala.png" alt="CØLD Classic Longsleeve White" class="product-image">
+                    <h3 class="product-title">CØLD Classic Longsleeve</h3>
+                    <p class="product-desc">White / Heavyweight Garment-Dyed Cotton / Boxy Fit</p>
+                </div>
+                <div>
+                    <div class="product-price" data-usd="34.99">$34.99</div>
+                    <a href="https://app.amazecommerce.com/shop/coldwear/cld-classic-4" target="_blank" class="buy-button">KUP TERAZ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAPIS COMING SOON NA DOLE -->
+        <div class="coming-soon-section">
+            <div class="coming-soon-text">CØMING SØØN</div>
+        </div>
+
     </main>
 
     <footer>
         &copy; 2026 CØLD STREETWEAR. ALL RIGHTS RESERVED.
     </footer>
 
+    <!-- SKRYPT INTERAKCJI (JĘZYK, WALUTA, KOSZYK) -->
+    <script>
+        // STAN APLIKACJI
+        let currentLang = 'PL';
+        let currentCurrency = 'USD';
+        const usdToPlnRate = 4.0;
+
+        // ELEMENTY INTERFEJSU
+        const btnLang = document.getElementById('btnLang');
+        const btnCurr = document.getElementById('btnCurr');
+        const btnCart = document.getElementById('btnCart');
+        const closeCart = document.getElementById('closeCart');
+        const cartDrawer = document.getElementById('cartDrawer');
+        const cartOverlay = document.getElementById('cartOverlay');
+
+        // SŁOWNIK PRZETŁUMACZEŃ
+        const translations = {
+            PL: {
+                secPopular: "POPULARNE",
+                secTshirts: "KOSZULKI",
+                secLongsleeve: "LONGSLEEVE",
+                txtCartBtn: "KOSZYK (0)",
+                txtCartTitle: "TWÓJ KOSZYK",
+                txtCartEmpty: "Koszyk i płatności są realizowane bezpośrednio na szyfrowanej platformie Amaze Commerce po kliknięciu 'KUP TERAZ'.",
+                buyBtn: "KUP TERAZ"
+            },
+            EN: {
+                secPopular: "POPULAR",
+                secTshirts: "T-SHIRTS",
+                secLongsleeve: "LONGSLEEVE",
+                txtCartBtn: "CART (0)",
+                txtCartTitle: "YOUR CART",
+                txtCartEmpty: "Cart & checkout are securely processed on Amaze Commerce upon clicking 'BUY NOW'.",
+                buyBtn: "BUY NOW"
+            }
+        };
+
+        // ZMIANA JĘZYKA
+        btnLang.addEventListener('click', () => {
+            currentLang = currentLang === 'PL' ? 'EN' : 'PL';
+            btnLang.textContent = currentLang;
+
+            const t = translations[currentLang];
+            document.getElementById('secPopular').textContent = t.secPopular;
+            document.getElementById('secTshirts').textContent = t.secTshirts;
+            document.getElementById('secLongsleeve').textContent = t.secLongsleeve;
+            document.getElementById('txtCartBtn').textContent = t.txtCartBtn;
+            document.getElementById('txtCartTitle').textContent = t.txtCartTitle;
+            document.getElementById('txtCartEmpty').textContent = t.txtCartEmpty;
+
+            document.querySelectorAll('.buy-button').forEach(btn => {
+                btn.textContent = t.buyBtn;
+            });
+        });
+
+        // ZMIANA WALUTY (USD <-> PLN)
+        btnCurr.addEventListener('click', () => {
+            currentCurrency = currentCurrency === 'USD' ? 'PLN' : 'USD';
+            btnCurr.textContent = currentCurrency === 'USD' ? 'USD ($)' : 'PLN (zł)';
+
+            document.querySelectorAll('.product-price').forEach(el => {
+                const usdVal = parseFloat(el.getAttribute('data-usd'));
+                if (currentCurrency === 'PLN') {
+                    const plnVal = (usdVal * usdToPlnRate).toFixed(2);
+                    el.textContent = `${plnVal} PLN`;
+                } else {
+                    el.textContent = `$${usdVal.toFixed(2)}`;
+                }
+            });
+        });
+
+        // OTWIERANIE I ZAMYKANIE KOSZYKA
+        btnCart.addEventListener('click', () => {
+            cartDrawer.classList.add('open');
+            cartOverlay.classList.add('open');
+        });
+
+        const hideCart = () => {
+            cartDrawer.classList.remove('open');
+            cartOverlay.classList.remove('open');
+        };
+
+        closeCart.addEventListener('click', hideCart);
+        cartOverlay.addEventListener('click', hideCart);
+    </script>
 </body>
 </html>
